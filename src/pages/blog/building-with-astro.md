@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/BlogLayout.astro
+layout: ../../layouts/BlogLayout.astro
 title: "Building with Astro"
 date: "December 5, 2024"
 ---

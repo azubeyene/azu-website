@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/BlogLayout.astro
+layout: ../../layouts/BlogLayout.astro
 title: "My First Blog Post"
 date: "December 15, 2024"
 ---

@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/ProjectLayout.astro
+layout: ../../layouts/ProjectLayout.astro
 title: "Your First Project"
 date: "December 2024"
 ---

@@ -1,5 +1,5 @@
 ---
-layout: ../layouts/BlogLayout.astro
+layout: ../../layouts/BlogLayout.astro
 title: "Thoughts on Web Development"
 date: "December 10, 2024"
 ---
