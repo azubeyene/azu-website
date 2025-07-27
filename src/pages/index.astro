@@ -1,16 +1,126 @@
 ---
-
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/growing_plant_favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <title>Azariah Beyene</title>
+  </head>
+  <body class="bg-white text-green-800 font-sans">
+    <!-- Navbar -->
+    <header class="max-w-3xl mx-auto px-6 py-16">
+      <nav class="flex justify-between items-center">
+        <a href="/" class="text-2xl font-semibold text-green-900 hover:text-green-600 transition-colors">
+          Azariah Beyene
+        </a>
+        <div class="flex space-x-8">
+          <a href="#projects" class="text-green-600 hover:text-green-900 transition-colors text-lg">projects</a>
+          <a href="/blog" class="text-green-600 hover:text-green-900 transition-colors text-lg">blog</a>
+          <a href="/resume.pdf" target="_blank" class="text-green-600 hover:text-green-900 transition-colors text-lg">resume</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-6 pb-16">
+      <!-- Summary Section -->
+      <section class="space-y-4 mb-12">
+        <p class="text-green-800 leading-relaxed text-lg">
+          Hi
+        </p>
+      </section>
+
+      <!-- Profile Image -->
+      <section class="mb-12 flex justify-center">
+        <img 
+          src="/images/profile.png" 
+          alt="Profile photo"
+          class="w-full max-w-none rounded-lg shadow-sm"
+        />
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects">
+        <h2 class="text-xl font-medium text-green-900 mb-8">Notable projects:</h2>
+        
+        <div class="space-y-10">
+          <div class="project flex items-start space-x-6">
+            <!-- Project Image -->
+            <div class="flex-shrink-0">
+              <img 
+                src="/images/project1.png" 
+                alt="Your First Project"
+                class="w-24 h-24 rounded object-cover shadow-sm"
+              />
+            </div>
+            
+            <!-- Project Info -->
+            <div class="flex-1">
+              <div class="flex items-baseline space-x-3 mb-2">
+                <a href="/projects/first-project" class="font-medium text-green-900 hover:text-green-600 transition-colors text-lg">
+                  Your First Project
+                </a>
+                <span class="text-base text-green-600">December 2024</span>
+              </div>
+              <p class="text-green-800 leading-relaxed">
+                A brief description of what this project does and why it matters. This explains the key features and impact.
+              </p>
+            </div>
+          </div>
+
+          <div class="project flex items-start space-x-6">
+            <!-- Project Image -->
+            <div class="flex-shrink-0">
+              <img 
+                src="/images/project2.png" 
+                alt="Another Cool Project"
+                class="w-24 h-24 rounded object-cover shadow-sm"
+              />
+            </div>
+            
+            <!-- Project Info -->
+            <div class="flex-1">
+              <div class="flex items-baseline space-x-3 mb-2">
+                <a href="/projects/another-cool-project" class="font-medium text-green-900 hover:text-green-600 transition-colors text-lg">
+                  Another Cool Project
+                </a>
+                <span class="text-base text-green-600">October 2024</span>
+              </div>
+              <p class="text-green-800 leading-relaxed">
+                Another short description highlighting the key aspects and what makes this project interesting.
+              </p>
+            </div>
+          </div>
+
+          <div class="project flex items-start space-x-6">
+            <!-- Project Image -->
+            <div class="flex-shrink-0">
+              <img 
+                src="/images/project3.png" 
+                alt="Third Project"
+                class="w-24 h-24 rounded object-cover shadow-sm"
+              />
+            </div>
+            
+            <!-- Project Info -->
+            <div class="flex-1">
+              <div class="flex items-baseline space-x-3 mb-2">
+                <a href="/projects/third-project" class="font-medium text-green-900 hover:text-green-600 transition-colors text-lg">
+                  Third Project
+                </a>
+                <span class="text-base text-green-600">August 2024</span>
+              </div>
+              <p class="text-green-800 leading-relaxed">
+                Brief overview of this project and its impact on users or the broader community.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>
