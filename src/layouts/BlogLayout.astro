@@ -1,6 +1,7 @@
 ---
 const { frontmatter } = Astro.props;
 const currentPath = Astro.url.pathname;
+import '../styles/global.css';
 ---
 
 <html lang="en">
@@ -8,7 +9,6 @@ const currentPath = Astro.url.pathname;
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/growing_plant_favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="/src/styles/global.css" />
     <title>{frontmatter.title} - Azariah Beyene</title>
   </head>
   <body class="bg-white text-green-800 font-sans">
