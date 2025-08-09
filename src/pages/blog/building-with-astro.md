@@ -2,6 +2,7 @@
 layout: ../../layouts/BlogLayout.astro
 title: "Building with Astro"
 date: "December 5, 2024"
+description: "Brief description for the listing"
 ---
 
 # Building This Website

@@ -1,6 +1,16 @@
 ---
 const currentPath = Astro.url.pathname;
 import '../../styles/global.css';
+
+// Get all blog posts
+const posts = await Astro.glob('../blog/*.md');
+
+// Sort by date (newest first)
+const sortedPosts = posts.sort((a, b) => {
+  const dateA = new Date(a.frontmatter.date);
+  const dateB = new Date(b.frontmatter.date);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <html lang="en">
@@ -10,17 +20,17 @@ import '../../styles/global.css';
     <meta name="viewport" content="width=device-width" />
     <title>Blog - Azariah Beyene</title>
   </head>
-  <body class="bg-white text-green-800 font-sans">
+  <body class="bg-white text-green-950 font-sans">
     <!-- Navbar -->
     <header class="max-w-3xl mx-auto px-6 py-16">
       <nav class="flex justify-between items-center">
-        <a href="/" class="text-2xl font-semibold text-green-900 hover:text-green-600 transition-colors">
+        <a href="/" class="text-2xl font-semibold text-green-950 hover:text-green-600 transition-colors">
           Azariah Beyene
         </a>
         <div class="flex space-x-8">
-          <a href="/#projects" class="text-green-600 hover:text-green-900 transition-colors text-lg">projects</a>
-          <a href="/blog" class={`text-green-600 hover:text-green-900 transition-colors text-lg relative ${currentPath.startsWith('/blog') ? 'after:content-[""] after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-green-600' : ''}`}>blog</a>
-          <a href="/resume.pdf" target="_blank" class="text-green-600 hover:text-green-900 transition-colors text-lg">resume</a>
+          <a href="/#projects" class="text-green-600 hover:text-green-950 transition-colors text-lg">projects</a>
+          <a href="/blog" class={`text-green-600 hover:text-green-950 transition-colors text-lg relative ${currentPath.startsWith('/blog') ? 'after:content-[""] after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-green-600' : ''}`}>blog</a>
+          <a href="/resume.pdf" target="_blank" class="text-green-600 hover:text-green-950 transition-colors text-lg">resume</a>
         </div>
       </nav>
     </header>
@@ -28,54 +38,32 @@ import '../../styles/global.css';
     <!-- Blog List -->
     <main class="max-w-3xl mx-auto px-6 pb-16">
       <div class="space-y-10">
-        <div class="blog-post">
-          <div class="flex items-baseline space-x-3 mb-2">
-            <a href="/blog/first-post" class="font-medium text-green-900 hover:text-green-600 transition-colors text-lg">
-              My First Blog Post
-            </a>
-            <span class="text-base text-green-600">December 15, 2024</span>
+        {sortedPosts.map((post) => (
+          <div class="blog-post">
+            <div class="flex items-baseline space-x-3 mb-2">
+              <a href={post.url} class="font-medium text-green-950 hover:text-green-600 transition-colors text-lg">
+                {post.frontmatter.title}
+              </a>
+              <span class="text-base text-green-600">{post.frontmatter.date}</span>
+            </div>
+            <p class="text-green-950 leading-relaxed italic">
+              {post.frontmatter.description}
+            </p>
           </div>
-          <p class="text-green-800 leading-relaxed italic">
-            An introduction to my blog and what I plan to write about.
-          </p>
-        </div>
-
-        <div class="blog-post">
-          <div class="flex items-baseline space-x-3 mb-2">
-            <a href="/blog/web-development-thoughts" class="font-medium text-green-900 hover:text-green-600 transition-colors text-lg">
-              Thoughts on Web Development
-            </a>
-            <span class="text-base text-green-600">December 10, 2024</span>
-          </div>
-          <p class="text-green-800 leading-relaxed italic">
-            Some reflections on modern web development practices and tools.
-          </p>
-        </div>
-
-        <div class="blog-post">
-          <div class="flex items-baseline space-x-3 mb-2">
-            <a href="/blog/building-with-astro" class="font-medium text-green-900 hover:text-green-600 transition-colors text-lg">
-              Building with Astro
-            </a>
-            <span class="text-base text-green-600">December 5, 2024</span>
-          </div>
-          <p class="text-green-800 leading-relaxed italic">
-            My experience building this website with Astro and Tailwind.
-          </p>
-        </div>
+        ))}
       </div>
     </main>
   </body>
 
   <footer class="max-w-3xl mx-auto px-6 py-8 text-center space-y-4">
 	<div class="flex justify-center space-x-6">
-		<a href="mailto:azubeyene@gmail.com" class="text-green-600 hover:text-green-900 transition-colors">Email</a>
-		<a href="https://github.com/azubeyene" target="_blank" class="text-green-600 hover:text-green-900 transition-colors">GitHub</a>
-		<a href="https://www.linkedin.com/in/azariah-beyene-729573168/" target="_blank" class="text-green-600 hover:text-green-900 transition-colors">LinkedIn</a>
+		<a href="mailto:azubeyene@gmail.com" class="text-green-600 hover:text-green-950 transition-colors">Email</a>
+		<a href="https://github.com/azubeyene" target="_blank" class="text-green-600 hover:text-green-950 transition-colors">GitHub</a>
+		<a href="https://www.linkedin.com/in/azariah-beyene-729573168/" target="_blank" class="text-green-600 hover:text-green-950 transition-colors">LinkedIn</a>
 	</div>
 	<p class="text-green-600 text-sm">
 	  Site design lovingly borrowed from the GOAT 
-	  <a href="https://www.ekzhang.com/" target="_blank" class="hover:text-green-900 transition-colors underline">
+	  <a href="https://www.ekzhang.com/" target="_blank" class="hover:text-green-950 transition-colors underline">
 		Eric Zhang
 	  </a>
 	</p>

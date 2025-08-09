@@ -2,6 +2,7 @@
 layout: ../../layouts/BlogLayout.astro
 title: "My First Blog Post"
 date: "December 15, 2024"
+description: "Brief description for the listing"
 ---
 
 # Welcome to My Blog

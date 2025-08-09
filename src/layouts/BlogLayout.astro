@@ -11,30 +11,40 @@ import '../styles/global.css';
     <meta name="viewport" content="width=device-width" />
     <title>{frontmatter.title} - Azariah Beyene</title>
   </head>
-  <body class="bg-white text-green-800 font-sans">
+  <body class="bg-white text-green-950 font-sans">
     <!-- Navbar -->
     <header class="max-w-3xl mx-auto px-6 py-16">
       <nav class="flex justify-between items-center">
-        <a href="/" class="text-2xl font-semibold text-green-900 hover:text-green-600 transition-colors">
+        <a href="/" class="text-2xl font-semibold text-green-950 hover:text-green-600 transition-colors">
           Azariah Beyene
         </a>
         <div class="flex space-x-8">
-          <a href="/#projects" class="text-green-600 hover:text-green-900 transition-colors text-lg">projects</a>
-          <a href="/blog" class={`text-green-600 hover:text-green-900 transition-colors text-lg relative ${currentPath.startsWith('/blog') ? 'after:content-[""] after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-green-600' : ''}`}>blog</a>
-          <a href="/resume.pdf" target="_blank" class="text-green-600 hover:text-green-900 transition-colors text-lg">resume</a>
+          <a href="/#projects" class="text-green-600 hover:text-green-950 transition-colors text-lg">projects</a>
+          <a href="/blog" class={`text-green-600 hover:text-green-950 transition-colors text-lg relative ${currentPath.startsWith('/blog') ? 'after:content-[""] after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-0.5 after:bg-green-600' : ''}`}>blog</a>
+          <a href="/resume.pdf" target="_blank" class="text-green-600 hover:text-green-950 transition-colors text-lg">resume</a>
         </div>
       </nav>
     </header>
 
     <!-- Blog Content -->
     <main class="max-w-3xl mx-auto px-6 pb-16">
-      <article class="prose prose-lg max-w-none">
-        <h1 class="text-3xl font-semibold text-green-900 mb-4">{frontmatter.title}</h1>
+      <article>
+        <h1 class="text-3xl font-semibold text-green-950 mb-4">{frontmatter.title}</h1>
         <p class="text-green-600 text-lg mb-8">{frontmatter.date}</p>
-        <div class="text-green-800 leading-relaxed text-lg space-y-4">
+        <div class="prose prose-base max-w-none space-y-4">
           <slot />
         </div>
       </article>
     </main>
+    <style is:global>
+      .prose h1 { @apply text-2xl font-semibold text-green-950 mb-4 mt-8; }
+      .prose h2 { @apply text-xl font-medium text-green-950 mb-3 mt-6; }
+      .prose h3 { @apply text-lg font-medium text-green-950 mb-2 mt-4; }
+      .prose p { @apply mb-4 text-green-950 leading-relaxed text-lg; }
+      .prose ul { @apply list-disc ml-6 mb-4 space-y-1; }
+      .prose li { @apply text-green-950; }
+      .prose strong { @apply font-semibold; }
+      .prose em { @apply italic; }
+    </style>
   </body>
 </html>

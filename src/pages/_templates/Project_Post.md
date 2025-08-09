@@ -1,11 +1,7 @@
 ---
 layout: ../../layouts/ProjectLayout.astro
-title: "Third Project"
-date: "August 2024"
+title: "<% tp.file.title %>"
+date: "<% tp.date.now("MMMM D, YYYY") %>"
 description: "Brief description for the project"
 image: "/images/default_project_img.png"
 ---
-
-# Project Description
-
-Tell the story of this project.
