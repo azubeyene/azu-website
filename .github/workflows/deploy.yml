@@ -84,7 +84,6 @@ jobs:
                   );
 
                   console.log(s);
-                  console.log(`![](${base}${file})`); 
 
                   fs.writeFileSync(fp, s);
                 }
