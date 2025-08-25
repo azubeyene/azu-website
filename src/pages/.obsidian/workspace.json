@@ -25,10 +25,14 @@
             "id": "3af3b765becee905",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "projects/test project.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "test project"
             }
           }
         ],
@@ -182,6 +186,9 @@
   },
   "active": "3af3b765becee905",
   "lastOpenFiles": [
+    "projects/test project.md",
+    "projects/_assets/default_project_img.png",
+    "blog/_assets/default_project_img.png",
     "blog/Test test.md",
     "blog/_assets/IMG_1041.jpg",
     "projects/_assets/growing_plant_favicon.svg",
@@ -200,7 +207,6 @@
     "project_drafts/Untitled.md",
     "project_drafts",
     "blog_drafts",
-    "projects/Untitled.md",
     "_templates/Project_Post.md",
     "blog/This is cool.md",
     "_templates",
