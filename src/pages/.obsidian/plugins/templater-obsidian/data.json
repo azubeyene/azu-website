@@ -21,6 +21,14 @@
     {
       "folder": "projects",
       "template": "_templates/Project_Post.md"
+    },
+    {
+      "folder": "blog_drafts",
+      "template": "_templates/Blog_Post.md"
+    },
+    {
+      "folder": "project_drafts",
+      "template": "_templates/Project_Post.md"
     }
   ],
   "enable_file_templates": false,

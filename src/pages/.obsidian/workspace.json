@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "120cc54d61cfdd75",
+        "id": "5718e39d8f8afe92",
         "type": "tabs",
         "children": [
           {
-            "id": "a94c1d735f7c318d",
+            "id": "2e3d205f45dc2857",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_templates/Blog_Post.md",
+                "file": "blog/Test test.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Blog_Post"
+              "title": "Test test"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_templates/Blog_Post.md",
+                "file": "blog/building-with-astro.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Blog_Post"
+              "title": "Backlinks for building-with-astro"
             }
           },
           {
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_templates/Blog_Post.md",
+                "file": "blog/building-with-astro.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Blog_Post"
+              "title": "Outgoing links from building-with-astro"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_templates/Blog_Post.md",
+                "file": "blog/building-with-astro.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Blog_Post"
+              "title": "Outline of building-with-astro"
             }
           }
         ]
@@ -169,13 +169,29 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "a94c1d735f7c318d",
+  "active": "2e3d205f45dc2857",
   "lastOpenFiles": [
-    "blog/Untitled.md",
-    "_templates/Blog_Post.md",
-    "blog/This is cool.md",
+    "blog/_assets/IMG_1041.jpg",
+    "blog/Test test.md",
+    "projects/_assets/growing_plant_favicon.svg",
+    "blog/_assets/growing_plant_favicon.svg",
+    "blog/_assets/Pasted image 20250824175730.png",
+    "blog_drafts/Hello example.md",
     "blog/building-with-astro.md",
+    "blog/_assets/resume.pdf",
+    "blog_drafts/_assets/Pasted image 20250824172548.png",
+    "_templates/Blog_Post.md",
+    "project_drafts/_assets",
+    "blog_drafts/_assets",
+    "projects/_assets",
+    "blog/_assets",
+    "blog_drafts/Hi.md",
+    "project_drafts/Untitled.md",
+    "project_drafts",
+    "blog_drafts",
+    "projects/Untitled.md",
     "_templates/Project_Post.md",
+    "blog/This is cool.md",
     "_templates",
     "_templates:",
     "untitled folder",

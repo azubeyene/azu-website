@@ -22,3 +22,16 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# obsidian configs
+src/pages/.obsidian/
+.obsidian/
+
+# page assets
+src/pages/**/_assets/
+
+# husky 
+.husky/
+
+# sync jobs
+sync-assets.sh
