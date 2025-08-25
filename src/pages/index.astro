@@ -1,15 +1,5 @@
 ---
 import '../styles/global.css';
-
-// Get all project markdown files
-const projects = await Astro.glob('./projects/*.md');
-
-// Sort by date (newest first)  
-const sortedProjects = projects.sort((a, b) => {
-  const dateA = new Date(a.frontmatter.date);
-  const dateB = new Date(b.frontmatter.date);
-  return dateB.getTime() - dateA.getTime();
-});
 ---
 
 <html lang="en">
@@ -28,7 +18,7 @@ const sortedProjects = projects.sort((a, b) => {
           Azariah Beyene
         </a>
         <div class="flex space-x-8">
-          <a href="#projects" class="text-green-600 hover:text-green-950 transition-colors text-lg">projects</a>
+          <a href="/projects" class="text-green-600 hover:text-green-950 transition-colors text-lg">projects</a>
           <a href="/blog" class="text-green-600 hover:text-green-950 transition-colors text-lg">blog</a>
           <a href="/resume.pdf" target="_blank" class="text-green-600 hover:text-green-950 transition-colors text-lg">resume</a>
         </div>
@@ -51,40 +41,6 @@ const sortedProjects = projects.sort((a, b) => {
           alt="Profile photo"
           class="w-full max-w-none rounded-lg shadow-sm"
         />
-      </section>
-
-      <!-- Projects Section -->
-      <section id="projects">
-        <h2 class="text-xl font-medium text-green-950 mb-8">Notable projects:</h2>
-        
-        <div class="space-y-10">
-          {sortedProjects.map((project) => (
-            <div class="project flex items-start space-x-6">
-              <div class="flex-shrink-0">
-                <img 
-                  src={project.frontmatter.image || '/images/default-project.png'} 
-                  alt={project.frontmatter.title}
-                  class="w-24 h-24 rounded object-cover shadow-sm"
-                />
-              </div>
-              
-              <div class="flex-1">
-                <div class="flex items-baseline space-x-3 mb-2">
-                  <a 
-                    href={project.url} 
-                    class="font-medium text-green-950 hover:text-green-600 transition-colors text-lg"
-                  >
-                    {project.frontmatter.title}
-                  </a>
-                  <span class="text-base text-green-600">{project.frontmatter.date}</span>
-                </div>
-                <p class="text-green-950 leading-relaxed">
-                  {project.frontmatter.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
     </main>
   </body>
