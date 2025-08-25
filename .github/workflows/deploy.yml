@@ -64,6 +64,7 @@ jobs:
                 const fp = path.join(p, ent.name);
                 if (ent.isDirectory()) walk(fp);
                 else if (ent.isFile() && fp.endsWith('.md')) {
+                  console.log("fp");
                   let s = fs.readFileSync(fp, 'utf8');
 
                   // 1) Markdown images: ![alt](_assets/foo.png) or ![alt](./_assets/foo.png)
@@ -81,6 +82,9 @@ jobs:
                     /^(\s*[-\s]*?(?:image|heroImage|cover|banner|thumbnail)\s*:\s*["']?)(?:\.\/)?_assets\/([^\r\n"']+)/gmi,
                     (_, pre, file) => `${pre}${base}${file}`
                   );
+
+                  console.log(s);
+                  console.log(`![${alt}](${base}${file})`); 
 
                   fs.writeFileSync(fp, s);
                 }
