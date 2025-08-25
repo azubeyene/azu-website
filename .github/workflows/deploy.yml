@@ -37,26 +37,40 @@ jobs:
           cache: 'npm'
       - name: Install deps
         run: npm ci
-      - name: Rewrite blog image links (Markdown)
+      - name: DEBUG before rewrite
         run: |
-          find src/pages/blog -type f -name "*.md" -print0 \
-            | xargs -0 perl -pi -e "s#\\!\\[([^\\]]*)\\]\\(\\./_assets/([^\\)]+)\\)#![\$1](${CDN_BASE_BLOG}\$2)#g"
-      - name: Rewrite project image links (Markdown)
+          echo "Scanning for _assets refs BEFORE rewrite..."
+          grep -RInE '\((\.\/)?_assets/|src=["'\''](\.\/)?_assets/|^\s*(image|heroImage|cover|banner|thumbnail)\s*:\s*["'\'']?(\.\/)?_assets/' src/pages || true
+      - name: Rewrite blog image refs to CDN
+        env:
+          CDN: ${{ env.CDN_BASE_BLOG }}
         run: |
-          find src/pages/projects -type f -name "*.md" -print0 \
-            | xargs -0 perl -pi -e "s#\\!\\[([^\\]]*)\\]\\(\\./_assets/([^\\)]+)\\)#![\$1](${CDN_BASE_PROJ}\$2)#g"
-      - name: Rewrite blog image links (HTML <img> inside MD)
+          find src/pages/blog -type f -name "*.md" -print0 | xargs -0 -I{} \
+          perl -0777 -i -pe "my \$cdn=\$ENV{CDN};
+            # Markdown image: ![alt](_assets/foo.png) or ![alt](./_assets/foo.png)
+            s{!\\[([^\\]]*)\\]\\((?:\\./)?_assets/([^\\)]+)\\)}{'!['.\$1.']('.\$cdn.\$2.')'}ge;
+
+            # Raw HTML <img src="_assets/foo.png"> or <img src="./_assets/foo.png">
+            s{(<img\\s+[^>]*?src=[\"\\'])(?:\\./)?_assets/([^\"\\'>]+)([\"\\'>])}{\$1.\$cdn.\$2.\$3}ge;
+
+            # Frontmatter keys like: image: _assets/foo.png
+            s{^([\\s-]*?(?:image|heroImage|cover|banner|thumbnail)\\s*:\\s*[\"\\']?)(?:\\./)?_assets/([^\"\\'\\r\\n]+)}{\$1.\$cdn.\$2}gmi;
+          " {}
+      - name: Rewrite project image refs to CDN
+        env:
+          CDN: ${{ env.CDN_BASE_PROJ }}
         run: |
-          find src/pages/blog -type f -name "*.md" -print0 \
-            | xargs -0 perl -pi -e "s#(<img\\s+[^>]*?src=\")\\./_assets/([^\"]+)(\")#\$1${CDN_BASE_BLOG}\$2\$3#g"
-      - name: Rewrite project image links (HTML <img> inside MD)
-        run: |
-          find src/pages/projects -type f -name "*.md" -print0 \
-            | xargs -0 perl -pi -e "s#(<img\\s+[^>]*?src=\")\\./_assets/([^\"]+)(\")#\$1${CDN_BASE_PROJ}\$2\$3#g"
+          find src/pages/projects -type f -name "*.md" -print0 | xargs -0 -I{} \
+          perl -0777 -i -pe "my \$cdn=\$ENV{CDN};
+            s{!\\[([^\\]]*)\\]\\((?:\\./)?_assets/([^\\)]+)\\)}{'!['.\$1.']('.\$cdn.\$2.')'}ge;
+            s{(<img\\s+[^>]*?src=[\"\\'])(?:\\./)?_assets/([^\"\\'>]+)([\"\\'>])}{\$1.\$cdn.\$2.\$3}ge;
+            s{^([\\s-]*?(?:image|heroImage|cover|banner|thumbnail)\\s*:\\s*[\"\\']?)(?:\\./)?_assets/([^\"\\'\\r\\n]+)}{\$1.\$cdn.\$2}gmi;
+          " {}
       - name: Verify no local _assets links remain
         run: |
-          if grep -R "(/|\()\\./_assets/" src/pages; then
-            echo "Found local _assets references after rewrite"; exit 1;
+          echo "Scanning for _assets refs AFTER rewrite..."
+          if grep -RInE '\((\.\/)?_assets/|src=["'\''](\.\/)?_assets/|^\s*(image|heroImage|cover|banner|thumbnail)\s*:\s*["'\'']?(\.\/)?_assets/' src/pages; then
+            echo "Found leftover _assets references after rewrite"; exit 1;
           fi
       - name: Build (Astro)
         run: npm run build
