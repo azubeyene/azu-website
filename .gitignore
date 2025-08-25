@@ -30,6 +30,7 @@ src/pages/.obsidian/
 
 # template folder 
 src/pages/_templates/
+
 # page assets
 src/pages/**/_assets/
 
