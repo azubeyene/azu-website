@@ -25,8 +25,11 @@ pnpm-debug.log*
 
 # obsidian configs
 src/pages/.obsidian/
+**/.obsidian/
 .obsidian/
 
+# template folder 
+src/pages/_templates/
 # page assets
 src/pages/**/_assets/
 
