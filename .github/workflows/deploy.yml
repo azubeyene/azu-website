@@ -21,8 +21,8 @@ permissions:
 
 # Set your CDN bases here 
 env:
-  CDN_BASE_BLOG: "https://cdn.example.com/blog/"
-  CDN_BASE_PROJ: "https://cdn.example.com/projects/"
+  CDN_BASE_BLOG: "https://cdn.azu.dev/blog/"
+  CDN_BASE_PROJ: "https://cdn.azu.dev/projects/"
 
 jobs:
   build:

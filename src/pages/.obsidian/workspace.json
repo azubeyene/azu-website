@@ -20,8 +20,19 @@
               "icon": "lucide-file",
               "title": "Test test"
             }
+          },
+          {
+            "id": "3af3b765becee905",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -169,10 +180,10 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "2e3d205f45dc2857",
+  "active": "3af3b765becee905",
   "lastOpenFiles": [
-    "blog/_assets/IMG_1041.jpg",
     "blog/Test test.md",
+    "blog/_assets/IMG_1041.jpg",
     "projects/_assets/growing_plant_favicon.svg",
     "blog/_assets/growing_plant_favicon.svg",
     "blog/_assets/Pasted image 20250824175730.png",
