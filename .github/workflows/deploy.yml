@@ -41,31 +41,57 @@ jobs:
         run: |
           echo "Scanning for _assets refs BEFORE rewrite..."
           grep -RInE '\((\.\/)?_assets/|src=["'\''](\.\/)?_assets/|^\s*(image|heroImage|cover|banner|thumbnail)\s*:\s*["'\'']?(\.\/)?_assets/' src/pages || true
-      - name: Rewrite blog image refs to CDN
+      - name: Rewrite _assets refs to CDN
         env:
-          CDN: ${{ env.CDN_BASE_BLOG }}
+          BLOG: ${{ env.CDN_BASE_BLOG }}
+          PROJ: ${{ env.CDN_BASE_PROJ }}
         run: |
-          find src/pages/blog -type f -name "*.md" -print0 | xargs -0 -I{} \
-          perl -0777 -i -pe "my \$cdn=\$ENV{CDN};
-            # Markdown image: ![alt](_assets/foo.png) or ![alt](./_assets/foo.png)
-            s{!\\[([^\\]]*)\\]\\((?:\\./)?_assets/([^\\)]+)\\)}{'!['.\$1.']('.\$cdn.\$2.')'}ge;
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
 
-            # Raw HTML <img src="_assets/foo.png"> or <img src="./_assets/foo.png">
-            s{(<img\\s+[^>]*?src=[\"\\'])(?:\\./)?_assets/([^\"\\'>]+)([\"\\'>])}{\$1.\$cdn.\$2.\$3}ge;
+          const BLOG = process.env.BLOG || '';
+          const PROJ = process.env.PROJ || '';
 
-            # Frontmatter keys like: image: _assets/foo.png
-            s{^([\\s-]*?(?:image|heroImage|cover|banner|thumbnail)\\s*:\\s*[\"\\']?)(?:\\./)?_assets/([^\"\\'\\r\\n]+)}{\$1.\$cdn.\$2}gmi;
-          " {}
-      - name: Rewrite project image refs to CDN
-        env:
-          CDN: ${{ env.CDN_BASE_PROJ }}
-        run: |
-          find src/pages/projects -type f -name "*.md" -print0 | xargs -0 -I{} \
-          perl -0777 -i -pe "my \$cdn=\$ENV{CDN};
-            s{!\\[([^\\]]*)\\]\\((?:\\./)?_assets/([^\\)]+)\\)}{'!['.\$1.']('.\$cdn.\$2.')'}ge;
-            s{(<img\\s+[^>]*?src=[\"\\'])(?:\\./)?_assets/([^\"\\'>]+)([\"\\'>])}{\$1.\$cdn.\$2.\$3}ge;
-            s{^([\\s-]*?(?:image|heroImage|cover|banner|thumbnail)\\s*:\\s*[\"\\']?)(?:\\./)?_assets/([^\"\\'\\r\\n]+)}{\$1.\$cdn.\$2}gmi;
-          " {}
+          if (!BLOG || !PROJ) {
+            console.error('CDN bases are empty. Set CDN_BASE_BLOG and CDN_BASE_PROJ envs.');
+            process.exit(1);
+          }
+
+          function rewriteDir(dir, base) {
+            const walk = (p) => {
+              for (const ent of fs.readdirSync(p, { withFileTypes: true })) {
+                const fp = path.join(p, ent.name);
+                if (ent.isDirectory()) walk(fp);
+                else if (ent.isFile() && fp.endsWith('.md')) {
+                  let s = fs.readFileSync(fp, 'utf8');
+
+                  // 1) Markdown images: ![alt](_assets/foo.png) or ![alt](./_assets/foo.png)
+                  s = s.replace(/!\[([^\]]*)\]\((?:\.\/)?_assets\/([^)]+)\)/g,
+                                (_, alt, file) => `![${alt}](${base}${file})`);
+
+                  // 2) Raw HTML: <img src="_assets/foo.png"> or <img src="./_assets/foo.png">
+                  s = s.replace(/(<img\s+[^>]*?src=["'])(?:\.\/)?_assets\/([^"'>]+)(["'>])/g,
+                                (_, pre, file, post) => `${pre}${base}${file}${post}`);
+
+                  // 3) Frontmatter keys on their own lines:
+                  // image: _assets/foo.png
+                  // heroImage: "./_assets/foo.png"
+                  s = s.replace(
+                    /^(\s*[-\s]*?(?:image|heroImage|cover|banner|thumbnail)\s*:\s*["']?)(?:\.\/)?_assets\/([^\r\n"']+)/gmi,
+                    (_, pre, file) => `${pre}${base}${file}`
+                  );
+
+                  fs.writeFileSync(fp, s);
+                }
+              }
+            };
+            if (fs.existsSync(dir)) walk(dir);
+          }
+
+          rewriteDir('src/pages/blog', BLOG);
+          rewriteDir('src/pages/projects', PROJ);
+          NODE
       - name: Verify no local _assets links remain
         run: |
           echo "Scanning for _assets refs AFTER rewrite..."
