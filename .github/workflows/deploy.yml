@@ -84,7 +84,7 @@ jobs:
                   );
 
                   console.log(s);
-                  console.log(`![${alt}](${base}${file})`); 
+                  console.log(`![](${base}${file})`); 
 
                   fs.writeFileSync(fp, s);
                 }
