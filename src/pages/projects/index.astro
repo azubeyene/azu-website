@@ -35,14 +35,14 @@ const sortedProjects = projects.sort((a, b) => {
       </nav>
     </header>
 
-    <!-- Blog List -->
+    <!-- Projects List -->
     <main class="max-w-3xl mx-auto px-6 pb-16">
         <div class="space-y-10">
             {sortedProjects.map((project) => (
               <div class="project flex items-start space-x-6">
                 <div class="flex-shrink-0">
                   <img 
-                    src={project.frontmatter.image || '/images/default-project.png'} 
+                    src={project.frontmatter.image || '/images/default-project.jpeg'} 
                     alt={project.frontmatter.title}
                     class="w-24 h-24 rounded object-cover shadow-sm"
                   />
