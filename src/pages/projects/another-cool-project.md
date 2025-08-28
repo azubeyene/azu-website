@@ -3,7 +3,7 @@ layout: ../../layouts/ProjectLayout.astro
 title: "Another Cool Project"
 date: "October 2024"
 description: "Brief description for the project"
-image: "/images/default_project_img.jpeg"
+image: "/images/default_project_img.jpg"
 ---
 
 # Project Overview

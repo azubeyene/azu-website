@@ -3,7 +3,7 @@ layout: ../../layouts/ProjectLayout.astro
 title: "Your First Project"
 date: "December 2024"
 description: "Brief description for the project"
-image: "/images/default_project_img.jpeg"
+image: "/images/default_project_img.jpg"
 ---
 
 # About This Project
